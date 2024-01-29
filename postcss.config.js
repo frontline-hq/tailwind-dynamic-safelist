@@ -13,6 +13,8 @@ function processSvelte(code, path) {
 	});
 }
 
+console.log('loading postcss config...');
+
 export default {
 	plugins: [
 		tailwindcss({

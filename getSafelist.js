@@ -51,10 +51,10 @@ export async function getSafelist(configPath, processFile) {
 			.subscribe(resolve(process.cwd(), './src'), async (err, events) => {
 				for (const { path } of events) safelist = await readSafelist(path);
 				// shitty way to restart vite server?
-				const viteConfigContent = await fs.readFile(resolve(process.cwd(), './vite.config.ts'), {
+				const viteConfigContent = await fs.readFile(resolve(process.cwd(), './postcss.config.js'), {
 					encoding: 'utf8'
 				});
-				await fs.writeFile(resolve(process.cwd(), './vite.config.ts'), viteConfigContent);
+				await fs.writeFile(resolve(process.cwd(), './postcss.config.js'), viteConfigContent);
 			})
 			.then((w) => (global.watcher = w));
 	}
