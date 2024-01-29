@@ -50,11 +50,17 @@ export async function getSafelist(configPath, processFile) {
 		watcher
 			.subscribe(resolve(process.cwd(), './src'), async (err, events) => {
 				for (const { path } of events) safelist = await readSafelist(path);
-				// shitty way to restart vite server?
-				const viteConfigContent = await fs.readFile(resolve(process.cwd(), './postcss.config.js'), {
-					encoding: 'utf8'
-				});
-				await fs.writeFile(resolve(process.cwd(), './postcss.config.js'), viteConfigContent);
+				// Force dependency re-optimization by removing the node_modules/.vite folder
+				await fs.rm(
+					resolve(process.cwd(), './node_modules/.vite'),
+					{ recursive: true, force: true },
+					(err) => {
+						if (err) {
+							throw err;
+						}
+						console.log(`${resolve(process.cwd(), './node_modules/.vite')} is deleted!`);
+					}
+				);
 			})
 			.then((w) => (global.watcher = w));
 	}
