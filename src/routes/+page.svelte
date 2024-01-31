@@ -3,7 +3,7 @@
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 
-	// dynamic-safelist('bg-' + 'green-500')
+	// dynamic-safelist('bg-' + 'green-600')
 </script>
 
 <svelte:head>
